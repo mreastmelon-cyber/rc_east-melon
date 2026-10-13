@@ -1,0 +1,9 @@
+# Build context is generated under bin/container by scripts/build-local-image.sh.
+FROM scratch
+COPY notification-service mock-provider /app/
+COPY ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY configs/ /app/configs/
+WORKDIR /app
+USER 65532:65532
+EXPOSE 50051 9090
+ENTRYPOINT ["/app/notification-service"]

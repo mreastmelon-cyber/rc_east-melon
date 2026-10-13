@@ -1,0 +1,12 @@
+[
+  {
+    "attempt_count": 0,
+    "observed_at": "2026-10-13T03:08:04.933381Z",
+    "state": "pending"
+  },
+  {
+    "attempt_count": 1,
+    "observed_at": "2026-10-13T03:08:05.81864Z",
+    "state": "succeeded"
+  }
+]

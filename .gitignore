@@ -1,0 +1,10 @@
+.idea/
+.env
+.env.*
+!.env.example
+.cache/
+bin/
+coverage.out
+*.test
+
+.DS_Store

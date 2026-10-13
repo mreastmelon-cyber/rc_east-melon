@@ -1,0 +1,1 @@
+notification-1   | 2026-10-13T03:08:05.794800129Z {"time":"2026-10-13T03:08:05.79434897Z","level":"INFO","msg":"delivery attempt completed","task_id":4,"destination":"mock-inventory","outcome":"success","error_code":""}

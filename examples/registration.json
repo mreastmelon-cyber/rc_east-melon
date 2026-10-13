@@ -1,0 +1,1 @@
+{"event":{"eventId":"registration-demo-001","source":"identity","eventType":"user.registered","schemaVersion":1,"occurredAt":"2026-10-13T00:00:00Z","registration":{"userId":"user-001","channel":"mock"}}}

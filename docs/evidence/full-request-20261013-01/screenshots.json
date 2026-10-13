@@ -1,0 +1,26 @@
+{
+  "capture_method": "cua_repl browser screenshots",
+  "view": "HTML display of actual recorded RPC responses, container logs and database queries",
+  "screenshots": [
+    {
+      "file": "01-ready.jpg",
+      "sha256": "095720211fc6e6ffd5445910504e4e6e1ff9cb09351504d46fa87aa2a166c845",
+      "bytes": 86742
+    },
+    {
+      "file": "02-submit.jpg",
+      "sha256": "0ff4c62bfb44a5d71fa35ac59feecd499b1af7620e09f82757df301cbbaf9944",
+      "bytes": 109841
+    },
+    {
+      "file": "03-delivery.jpg",
+      "sha256": "dae7eb125d44229b75f4795f8d4fc17277bffdb29402fc5b3728cd40e3ef3591",
+      "bytes": 126704
+    },
+    {
+      "file": "04-result.jpg",
+      "sha256": "3b05e3f753aa1993cd4f5e6e00b3a1809a3873d08f38a58c695c4efe77b5b0c6",
+      "bytes": 122023
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "version": "v1.0",
+  "destinations": [
+    {
+      "id": "mock-ad",
+      "adapter": "ad.registration.v1",
+      "url": "http://mock-provider:8081/ad",
+      "allow_http": true,
+      "idempotency_mode": "none",
+      "success": {
+        "statuses": [
+          200
+        ],
+        "json_field": "success",
+        "json_value": "true"
+      }
+    },
+    {
+      "id": "mock-crm",
+      "adapter": "crm.contact.v1",
+      "url": "http://mock-provider:8081/crm",
+      "allow_http": true,
+      "idempotency_mode": "natural",
+      "success": {
+        "statuses": [
+          200
+        ],
+        "json_field": "success",
+        "json_value": "true"
+      }
+    },
+    {
+      "id": "mock-inventory",
+      "adapter": "inventory.purchase.v1",
+      "url": "http://mock-provider:8081/inventory",
+      "allow_http": true,
+      "idempotency_mode": "provider_key",
+      "idempotency_header": "Idempotency-Key",
+      "idempotency_retention_seconds": 86400,
+      "success": {
+        "statuses": [
+          200
+        ],
+        "json_field": "success",
+        "json_value": "true"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "source": "identity",
+      "event_type": "user.registered",
+      "schema_version": 1,
+      "channel": "mock",
+      "destinations": [
+        "mock-ad"
+      ]
+    },
+    {
+      "source": "billing",
+      "event_type": "subscription.paid",
+      "schema_version": 1,
+      "destinations": [
+        "mock-crm"
+      ]
+    },
+    {
+      "source": "shop",
+      "event_type": "purchase.completed",
+      "schema_version": 1,
+      "destinations": [
+        "mock-inventory"
+      ]
+    }
+  ],
+  "credentials": [
+    {
+      "token_ref": "IDENTITY_RPC_TOKEN",
+      "source": "identity"
+    },
+    {
+      "token_ref": "BILLING_RPC_TOKEN",
+      "source": "billing"
+    },
+    {
+      "token_ref": "SHOP_RPC_TOKEN",
+      "source": "shop"
+    },
+    {
+      "token_ref": "ADMIN_RPC_TOKEN",
+      "operator": "local-operator",
+      "admin": true
+    }
+  ]
+}

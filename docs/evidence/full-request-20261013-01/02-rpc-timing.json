@@ -1,0 +1,8 @@
+{
+  "elapsed_ms": 8,
+  "grpc_status": "OK",
+  "identity": "shop (credential omitted)",
+  "method": "/notification.v1.NotificationService/SubmitEvent",
+  "returned_at": "2026-10-13T03:08:04.930177Z",
+  "sent_at": "2026-10-13T03:08:04.921673Z"
+}

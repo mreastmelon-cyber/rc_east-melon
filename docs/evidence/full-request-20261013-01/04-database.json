@@ -1,0 +1,23 @@
+{
+  "attempt_count": 1,
+  "attempt_rows": 1,
+  "body_sha256": "a30c2e7187d715e70e6883bbf6c7c569a1d313c290e098625737b800a057daac",
+  "checked_at": "2026-10-13T03:08:05.84191Z",
+  "completed_at": "2026-10-13T03:08:05.796482Z",
+  "destination_id": "mock-inventory",
+  "event_id": 4,
+  "event_rows": 1,
+  "idempotency_key": "70297d8e-668a-4002-b3b7-aeb31ab80087",
+  "last_http_status": 200,
+  "request_body": {
+    "order_id": "evidence-order-a1d19d6e",
+    "product_id": "evidence-product-001",
+    "quantity": 2
+  },
+  "request_method": "POST",
+  "request_url": "http://mock-provider:8081/inventory",
+  "source_event_id": "evidence-purchase-20261013T030804-1a7e3808",
+  "state": "succeeded",
+  "task_id": 4,
+  "task_rows": 1
+}

@@ -1,0 +1,32 @@
+{
+  "id":  "4",
+  "event":  {
+    "eventId":  "evidence-purchase-20261013T030804-1a7e3808",
+    "source":  "shop",
+    "eventType":  "purchase.completed",
+    "schemaVersion":  1,
+    "occurredAt":  "2026-10-13T03:08:04.735180Z",
+    "purchase":  {
+      "orderId":  "evidence-order-a1d19d6e",
+      "productId":  "evidence-product-001",
+      "quantity":  2
+    }
+  },
+  "tasks":  [
+    {
+      "id":  "4",
+      "eventId":  "4",
+      "destinationId":  "mock-inventory",
+      "state":  "succeeded",
+      "attemptCount":  1,
+      "runNo":  1,
+      "runAttemptCount":  1,
+      "lastErrorCode":  "",
+      "lastErrorSummary":  "",
+      "nextAttemptAt":  null,
+      "deadlineAt":  "2026-10-14T03:08:04.925717Z",
+      "completedAt":  "2026-10-13T03:08:05.796482Z",
+      "closedAt":  null
+    }
+  ]
+}

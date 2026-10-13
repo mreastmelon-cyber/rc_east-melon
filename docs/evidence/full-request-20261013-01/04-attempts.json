@@ -1,0 +1,17 @@
+{
+  "attempts":  [
+    {
+      "id":  "4",
+      "taskId":  "4",
+      "attemptNo":  1,
+      "runNo":  1,
+      "outcome":  "success",
+      "httpStatus":  200,
+      "errorCode":  "",
+      "startedAt":  "2026-10-13T03:08:05.783713Z",
+      "finishedAt":  "2026-10-13T03:08:05.796482Z",
+      "lateResultJson":  ""
+    }
+  ],
+  "nextAfterId":  "0"
+}

@@ -1,0 +1,20 @@
+{
+  "body_sha256": "a30c2e7187d715e70e6883bbf6c7c569a1d313c290e098625737b800a057daac",
+  "checks": [
+    "gRPC health SERVING",
+    "fresh event accepted without duplicate",
+    "mock provider receipt matches idempotency key and body hash",
+    "Worker success log matches task ID",
+    "task succeeded; HTTP 200; exactly one attempt",
+    "MySQL persisted 1 event / 1 task / 1 attempt",
+    "repeat submission returns same event and task"
+  ],
+  "event_id": 4,
+  "idempotency_key": "70297d8e-668a-4002-b3b7-aeb31ab80087",
+  "provider": "local mock inventory API",
+  "result": "PASS",
+  "run_completed_at": "2026-10-13T03:08:06.019574Z",
+  "run_started_at": "2026-10-13T03:08:04.73518Z",
+  "source_event_id": "evidence-purchase-20261013T030804-1a7e3808",
+  "task_id": 4
+}

@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package notification.v1;
+option go_package = "github.com/mreastmelon-cyber/right-capital-project/api/notification/v1;notificationv1";
+
+import "google/protobuf/timestamp.proto";
+
+service NotificationService {
+  rpc SubmitEvent(SubmitEventRequest) returns (SubmitEventResponse);
+  rpc GetEvent(GetEventRequest) returns (EventView);
+  rpc GetTask(GetTaskRequest) returns (TaskView);
+}
+service ManagementService {
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse);
+  rpc ListAttempts(ListAttemptsRequest) returns (ListAttemptsResponse);
+  rpc ReplayTask(ReplayTaskRequest) returns (TaskView);
+  rpc ResolveTask(ResolveTaskRequest) returns (TaskView);
+}
+
+message Registration { string user_id = 1; string channel = 2; }
+message SubscriptionPayment { string customer_id = 1; string subscription_id = 2; string status = 3; }
+message Purchase { string order_id = 1; string product_id = 2; uint32 quantity = 3; }
+message Event {
+  string event_id = 1;
+  string source = 2;
+  string event_type = 3;
+  uint32 schema_version = 4;
+  google.protobuf.Timestamp occurred_at = 5;
+  oneof data {
+    Registration registration = 10;
+    SubscriptionPayment subscription_payment = 11;
+    Purchase purchase = 12;
+  }
+}
+message SubmitEventRequest { Event event = 1; }
+message SubmitEventResponse { uint64 id = 1; bool accepted = 2; bool duplicate = 3; repeated uint64 task_ids = 4; }
+message GetEventRequest { uint64 id = 1; }
+message GetTaskRequest { uint64 id = 1; }
+message EventView { uint64 id = 1; Event event = 2; repeated TaskView tasks = 3; }
+message TaskView {
+  uint64 id = 1; uint64 event_id = 2; string destination_id = 3; string state = 4;
+  uint32 attempt_count = 5; uint32 run_no = 6; uint32 run_attempt_count = 7;
+  string last_error_code = 8; string last_error_summary = 9;
+  google.protobuf.Timestamp next_attempt_at = 10;
+  google.protobuf.Timestamp deadline_at = 11;
+  google.protobuf.Timestamp completed_at = 12;
+  google.protobuf.Timestamp closed_at = 13;
+}
+message ListTasksRequest { string destination_id = 1; string state = 2; uint64 after_id = 3; uint32 limit = 4; }
+message ListTasksResponse { repeated TaskView tasks = 1; uint64 next_after_id = 2; }
+message ListAttemptsRequest { uint64 task_id = 1; uint64 after_id = 2; uint32 limit = 3; }
+message AttemptView {
+  uint64 id = 1; uint64 task_id = 2; uint32 attempt_no = 3; uint32 run_no = 4;
+  string outcome = 5; uint32 http_status = 6; string error_code = 7;
+  google.protobuf.Timestamp started_at = 8; google.protobuf.Timestamp finished_at = 9;
+  string late_result_json = 10;
+}
+message ListAttemptsResponse { repeated AttemptView attempts = 1; uint64 next_after_id = 2; }
+message ReplayTaskRequest {
+  uint64 task_id = 1; string operation_id = 2; string reason = 3;
+  string verification_evidence = 4; uint32 deadline_seconds = 5;
+}
+message ResolveTaskRequest {
+  uint64 task_id = 1; string operation_id = 2; string reason = 3;
+  string verification_evidence = 4; bool delivered = 5;
+}

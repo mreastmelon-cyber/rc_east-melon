@@ -1,0 +1,14 @@
+{
+  "event":  {
+    "eventId":  "evidence-purchase-20261013T030804-1a7e3808",
+    "source":  "shop",
+    "eventType":  "purchase.completed",
+    "schemaVersion":  1,
+    "occurredAt":  "2026-10-13T03:08:04.735180Z",
+    "purchase":  {
+      "orderId":  "evidence-order-a1d19d6e",
+      "productId":  "evidence-product-001",
+      "quantity":  2
+    }
+  }
+}

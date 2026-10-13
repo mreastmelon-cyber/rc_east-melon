@@ -1,0 +1,1 @@
+{"event":{"eventId":"payment-demo-001","source":"billing","eventType":"subscription.paid","schemaVersion":1,"occurredAt":"2026-10-13T00:00:00Z","subscriptionPayment":{"customerId":"customer-001","subscriptionId":"subscription-001","status":"paid"}}}

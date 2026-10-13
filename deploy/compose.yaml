@@ -1,0 +1,51 @@
+name: right-capital-notification
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-local-test-only}
+      MYSQL_DATABASE: notification
+      MYSQL_USER: notification
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-notification-local-only}
+    ports:
+      - "127.0.0.1:33068:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_ROOT_PASSWORD mysqladmin ping -h 127.0.0.1 --silent"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  mock-provider:
+    image: right-capital-notification:local
+    build:
+      context: ..
+    entrypoint: ["/app/mock-provider"]
+    command: ["-listen", "0.0.0.0:8081"]
+  notification:
+    image: right-capital-notification:local
+    build:
+      context: ..
+    command: ["-config", "configs/docker.json", "-listen", "0.0.0.0:50051", "-metrics-listen", "0.0.0.0:9090", "-insecure-dev", "-reflection", "-migrate"]
+    environment:
+      MYSQL_DSN: "notification:${MYSQL_PASSWORD:-notification-local-only}@tcp(mysql:3306)/notification"
+      IDENTITY_RPC_TOKEN: ${IDENTITY_RPC_TOKEN:-identity-local-only}
+      BILLING_RPC_TOKEN: ${BILLING_RPC_TOKEN:-billing-local-only}
+      SHOP_RPC_TOKEN: ${SHOP_RPC_TOKEN:-shop-local-only}
+      ADMIN_RPC_TOKEN: ${ADMIN_RPC_TOKEN:-admin-local-only}
+    ports:
+      - "127.0.0.1:50051:50051"
+      - "127.0.0.1:9090:9090"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mock-provider:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "/app/notification-service", "-mode", "healthcheck", "-insecure-dev"]
+      interval: 3s
+      timeout: 4s
+      retries: 20
+    stop_grace_period: 35s
+volumes:
+  mysql-data:
